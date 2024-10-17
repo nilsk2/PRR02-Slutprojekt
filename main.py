@@ -22,22 +22,25 @@ while True:
         index = int(weapon_choice)
         print(index)
         player_weapon = weapons[index-1]
-        print(player_weapon)
         break
     except ValueError:
         if weapon_choice not in weapons:
             print("Invalid answer")
             continue
         player_weapon = weapons[weapons.index(weapon_choice)]
-        print(player_weapon)
         break
     except IndexError:
         print("Invalid answer")
         continue
 
-foe_name = f'{rand.choice(adjective)} {rand.choice(races)}'
-print(foe_name, "fdka")
-foe = char(foe_name, 100, weapon)
+weapon_damage = input("tune your weapon with 100 points, more damage = less accuracy: ")
+
+plr = char("nils", 100, player_weapon)
+
+#foe saker
+#foe_name = f'{rand.choice(adjective)} {rand.choice(races)}'
+#print(foe_name)
+#foe = char(foe_name, 100, weapon)
 
 #klasser:
 #klass
