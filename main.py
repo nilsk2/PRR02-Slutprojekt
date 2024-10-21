@@ -1,4 +1,4 @@
-from character import character as char
+from character import Character as char
 import random as rand
 
 adjective = ["The Great", "The Evil", "The Furious",
@@ -34,13 +34,14 @@ for item in weapons:
     
 playerWeapon = weapons[(ReadInt("Choose your weapon: ", 0, 8))-1]
 
-weaponDamage = ReadInt("tune your weapon with 100 points, more damage = less accuracy: ", 0, 100)
-plr = char("nils", 100, playerWeapon, weaponDamage)
+playerWeaponDamage = ReadInt("tune your weapon with 100 points, more damage = less accuracy: ", 0, 100)
+plr = char("nils", 100, playerWeapon, playerWeaponDamage)
 
-#foe saker
-#foe_name = f'{rand.choice(adjective)} {rand.choice(races)}'
-#print(foe_name)
-#foe = char(foe_name, 100, weapon)
+foeName = f'{rand.choice(adjective)} {rand.choice(races)}'
+foe = char(foeName, 100, rand.choice(weapons), rand.randint(10, 90))
+
+plr.Attack(foe)
+
 #klasser:
 #klass
 #attacker

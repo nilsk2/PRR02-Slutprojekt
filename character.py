@@ -1,9 +1,20 @@
-class weapon: 
-    def __init__(self, weapon, base_dmg, difficulty): 
-        print(weapon, base_dmg, difficulty) 
+class Weapon: 
+    def __init__(self, weapon, baseDmg, difficulty): 
+        self.weapon = weapon
+        self.baseDmg = baseDmg
+        self.difficulty = difficulty
   
-class character:
+class Character:
     def __init__(self, name, hp, weaponName, weaponDamage):
         self.name = name
         self.hp = hp
-        self.obj1 = weapon(weaponName, weaponDamage, 100-weaponDamage)
+        self.charWeapon = Weapon(weaponName, weaponDamage, 100-weaponDamage)
+
+    def Attack(self, target):
+        damage = self.charWeapon.baseDmg
+        # crits, buffs
+        target.TakeDamage(damage)
+
+    def TakeDamage(self, damage):
+        self.hp -= damage
+        print(self.name, damage)
