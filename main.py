@@ -22,12 +22,23 @@ def ReadInt(message, min, max):
         userInput = input(message).lower()
         try:
             userInput = int(userInput)
-            if userInput < min or userInput > max:
-                raise
+            if userInput < min or userInput > max: raise
             return userInput
         except:
             print(f"Invalid input! Must be a whole number in the range {min}-{max}")
             continue
+
+def printGui():
+    print("\n")
+    print(foe.name)
+    print(f'HP: {foe.hp}')
+    print("\n")
+    print(plr.name)
+    print(f'HP: {plr.hp}')
+    print("\n")
+
+    input("Press enter to continue...")
+
 
 ##########
 
@@ -51,7 +62,8 @@ while True:
         playersTurn = True
     if foe.hp <= 0 or plr.hp <= 0:
         break
-    input("press enter to continue")
+    printGui()
+    
 
 #klasser:
 #klass

@@ -1,3 +1,5 @@
+import random as rand
+
 class Weapon: 
     def __init__(self, weapon, baseDmg, difficulty): 
         self.weapon = weapon
@@ -12,10 +14,13 @@ class Character:
 
     def Attack(self, target):
         damage = self.charWeapon.baseDmg
-        # crits, buffs
-        target.TakeDamage(damage)
+
+        if rand.randrange(0,100) < self.charWeapon.difficulty:
+            target.TakeDamage(damage)
+        else:
+            print("Miss!")
+            target.TakeDamage(0)
 
     def TakeDamage(self, damage):
         self.hp -= damage
         if self.hp < 0: self.hp = 0
-        print(self.name, self.hp)
