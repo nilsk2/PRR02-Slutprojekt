@@ -17,4 +17,5 @@ class Character:
 
     def TakeDamage(self, damage):
         self.hp -= damage
-        print(self.name, damage)
+        if self.hp < 0: self.hp = 0
+        print(self.name, self.hp)

@@ -13,6 +13,8 @@ weapons = ["sword", "axe", "bow",
            "dagger", "spear", "crossbow",
            "mace", "hammer"]
 
+playersTurn = False
+
 ####metoder
 
 def ReadInt(message, min, max):
@@ -40,7 +42,16 @@ plr = char("nils", 100, playerWeapon, playerWeaponDamage)
 foeName = f'{rand.choice(adjective)} {rand.choice(races)}'
 foe = char(foeName, 100, rand.choice(weapons), rand.randint(10, 90))
 
-plr.Attack(foe)
+while True:
+    if playersTurn == True:
+        plr.Attack(foe)
+        playersTurn = False
+    else:
+        foe.Attack(plr)
+        playersTurn = True
+    if foe.hp <= 0 or plr.hp <= 0:
+        break
+    input("press enter to continue")
 
 #klasser:
 #klass
@@ -48,4 +59,3 @@ plr.Attack(foe)
 #vapen
 #char
 #mer
-#fkdkfdk
