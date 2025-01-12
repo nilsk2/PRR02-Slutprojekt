@@ -49,11 +49,11 @@ foe = char(foeName, 100, rand.randint(10, 90))
 while True:
     if playersTurn == True:
         print("It is now your turn: \n")
-        plr.Attack(foe)
+        plr.attack(foe)
         playersTurn = False
     else:
         print("It is now the enemy's turn: \n")
-        foe.Attack(plr)
+        foe.attack(plr)
         playersTurn = True
     
     if foe.hp <= 0 or plr.hp <= 0:
@@ -62,7 +62,6 @@ while True:
     
 PrintGui()
 #klasser:
-#klass
 #attacker
 #char
 #mer
