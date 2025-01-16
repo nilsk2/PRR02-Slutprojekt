@@ -2,18 +2,18 @@ import random as rand
 from weapon import Weapon
   
 class Character:
-    def __init__(self, name, hp, defense, weaponDamage):
+    def __init__(self, name, hp, defense, weaponDamage, weaponType):
         self.__name = name
         self.__hp = hp
         self.__defense = defense
-        self.__charWeapon = Weapon(weaponDamage, 100-weaponDamage)
+        self.__charWeapon = Weapon(weaponDamage, 100-weaponDamage, weaponType)
 
     def attack(self, target):
         damage = self.charWeapon.baseDmg
         randomValue = rand.randrange(0, 100)
         if randomValue < 10: 
             print("Critical hit!")
-            print(f"{round(damage * 2, 2)} damage is dealt by {self.name}")
+            print(f"{round(damage * 1.5, 2)} damage is dealt by {self.name}")
             target.takeDamage(damage * 2)
         elif randomValue < self.charWeapon.difficulty:
             print(f"{round(damage, 2)} damage is dealt by {self.name}")
