@@ -1,5 +1,6 @@
 import random as rand
 from weapon import Weapon
+from stats import Stats
   
 class Character:
     def __init__(self, name, hp, defense, weaponDamage, weaponType):
@@ -7,6 +8,7 @@ class Character:
         self.__hp = hp
         self.__defense = defense
         self.__charWeapon = Weapon(weaponDamage, 100-weaponDamage, weaponType)
+        self.__stats = Stats(weaponDamage)
 
     def attack(self, target):
         damage = self.charWeapon.baseDmg
@@ -15,9 +17,12 @@ class Character:
             print("Critical hit!")
             print(f"{round(damage * 1.5, 2)} damage is dealt by {self.name}")
             target.takeDamage(damage * 2)
+            self.__stats.hits = self.__stats.hits + 1
         elif randomValue < self.charWeapon.difficulty:
             print(f"{round(damage, 2)} damage is dealt by {self.name}")
             target.takeDamage(damage)
+            self.__stats.hits = self.__stats.hits + 1
+            
         else:
             print(f"{self.name}'s attack misses")
 
@@ -49,3 +54,7 @@ class Character:
     @property
     def charWeapon(self):
         return self.__charWeapon
+    
+    @property
+    def stats(self):
+        return self.__stats
