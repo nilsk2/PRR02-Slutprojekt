@@ -58,21 +58,27 @@ def MainLoop(Stats):
 
     #skapar fienden med random namn och stats
     foeName = f'{rand.choice(adjective)} {rand.choice(races)}'
-    foe = char(foeName, 100, 0.7, rand.randint(10, 90), weaponType)
+    foe = char(foeName, 100, 0.7, rand.randint(10, 90), weaponType) 
 
+
+    plr_stats = Stats()
+    foe_stats = Stats()
     #stats
 
     while True:
         if playersTurn == True:
             print("It is now your turn: \n")
-            plr.attack(foe)
+            plr_stats, foe_stats = plr.attack(foe, plr_stats, foe_stats)
             playersTurn = False
         else:
             print("It is now the enemy's turn: \n")
-            foe.attack(plr)
+            foe.attack(plr, foe_stats, foe_stats)
             playersTurn = True
         
         if foe.hp <= 0 or plr.hp <= 0:
+            results = char.stats
+            print(".....................................")
+            print(results.hits)
             break
         PrintGui(plr, foe)
         
@@ -81,17 +87,27 @@ def MainLoop(Stats):
         winner = plr if foe.hp <= 0 else foe
 
         print(f"{winner.name} wins the battle with {round(winner.hp, 2)} remaining HP!\n")
+        
+        ###RETURN STATS###
 
 
 ##########
 
+stats_storage = []
 #menyn f;r spelet
 while True:
     choice = ReadInt("[1] Play the game [2] Show stats [3] Quit\n", 1, 3)
     if choice == 1:
-        MainLoop(Stats)
+        result = MainLoop(Stats)
+
+
+
+        stats_storage.append(result)
     elif choice == 2:
-        PrintStats(Stats, foe, plr)
+        try:
+            PrintStats(Stats, foe, plr)
+        except:
+            print("no stats available, play a round first")
     else: sys.exit(1)
 
 

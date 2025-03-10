@@ -20,14 +20,15 @@ class Weapon:
     @staticmethod
     def selectWeapon(self):
         if weaponType == 1:
-            SwordAndShield(self, 1.5, 1)
+            return SwordAndShield(self, 1.5, 1)
+        else:
+            return Weapon()
 
 class SwordAndShield(Weapon):
-    def __init__(self, defenseMult, damageMult, criticalHit):
+    def __init__(self, defenseMult, damageMult):
         self.__defenseMult = defenseMult
         self.__damageMult = damageMult
-        self.__criticalHit = criticalHit
-
+        
     @property
     def defenseMult(self):
         return self.__defenseMult
@@ -35,7 +36,3 @@ class SwordAndShield(Weapon):
     @property
     def damageMult(self):
         return self.__damageMult
-    
-    @property
-    def criticalHit(self):
-        return self.__criticalHit
