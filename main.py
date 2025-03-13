@@ -42,8 +42,11 @@ def PrintGui(plr, foe):
         input("Press enter to continue...")
         os.system("cls")
 
-def PrintStats(Stats, foe, plr):
-    print(plr.stats.hits)
+def PrintStats(round_stats, characters):        
+    for i in range(2):
+        print(f"{round_stats[i].hits}")
+        print(f"{round_stats[i].damage_taken}")
+        print(f"{round_stats[i].misses}")
 
 #huvudloopen f;r spelet
 def MainLoop(Stats):
@@ -60,7 +63,6 @@ def MainLoop(Stats):
     foeName = f'{rand.choice(adjective)} {rand.choice(races)}'
     foe = char(foeName, 100, 0.7, rand.randint(10, 90), weaponType) 
 
-
     plr_stats = Stats()
     foe_stats = Stats()
     #stats
@@ -72,45 +74,43 @@ def MainLoop(Stats):
             playersTurn = False
         else:
             print("It is now the enemy's turn: \n")
-            foe.attack(plr, foe_stats, foe_stats)
+            foe_stats, plr_stats = foe.attack(plr, foe_stats, plr_stats)
             playersTurn = True
         
         if foe.hp <= 0 or plr.hp <= 0:
-            results = char.stats
-            print(".....................................")
-            print(results.hits)
             break
         PrintGui(plr, foe)
         
-        PrintGui(plr, foe)
-
-        winner = plr if foe.hp <= 0 else foe
-
-        print(f"{winner.name} wins the battle with {round(winner.hp, 2)} remaining HP!\n")
-        
-        ###RETURN STATS###
-
+    winner = plr if foe.hp <= 0 else foe
+    print(f"{winner.name} wins the battle with {(winner.hp):.2f} remaining HP!\n")
+    return plr_stats, foe_stats
+    ###RETURN STATS###
 
 ##########
 
 stats_storage = []
 #menyn f;r spelet
 while True:
+    result = ()
     choice = ReadInt("[1] Play the game [2] Show stats [3] Quit\n", 1, 3)
     if choice == 1:
         result = MainLoop(Stats)
-
-
-
         stats_storage.append(result)
     elif choice == 2:
         try:
-            PrintStats(Stats, foe, plr)
+            #print(stats_storage[0][0].hits)
+            count = 1
+            print("choose to view the stats from one of the rounds below: ")
+            for round in stats_storage:
+                print(f"- round {count}")
+                count+=1
+            choice = ReadInt("Round number: ", 1, count-1)
+            PrintStats(stats_storage[choice-1])
         except:
             print("no stats available, play a round first")
     else: sys.exit(1)
 
-
+# def PrintStats(Stats, foe, plr):
 #ATT G;RA
 # - TUNE
 # - ATTACK?>LFSGKFSGK
