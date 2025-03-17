@@ -5,6 +5,7 @@ class Stats:
         self.__damage_done = 0
         self.__damage_taken = 0
         self.__critical_hits = 0
+        self.__damage_blocked = 0
     
     @property
     def hits(self):
@@ -45,6 +46,15 @@ class Stats:
     @critical_hits.setter
     def critical_hits(self, value):
         self.__critical_hits = value
+    
+    @property
+    def damage_blocked(self):
+        return self.__damage_blocked
+
+    @damage_blocked.setter
+    def damage_blocked(self, value):
+        self.__damage_blocked = value
+    
     
 #output from mainloop = result
 #

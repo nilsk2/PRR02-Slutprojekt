@@ -17,11 +17,13 @@ class Character:
             print("Critical hit!")
             print(f"{damage * 1.5:.2f} damage is dealt by {self.name}")
             target.takeDamage(damage * 2, enemy_stats)
+            my_stats.damage_done += damage * 2
             return my_stats, enemy_stats
         elif randomValue < self.charWeapon.difficulty:
             my_stats.hits += 1
             print(f"{damage:.2f} damage is dealt by {self.name}")
             target.takeDamage(damage, enemy_stats)
+            my_stats.damage_done += damage
             return my_stats, enemy_stats      
         else:
             my_stats.misses += 1
@@ -31,6 +33,7 @@ class Character:
     def takeDamage(self, damage, enemy_stats):
         reducedDamage = max(0, damage * self.__defense)
         enemy_stats.damage_taken += reducedDamage
+        enemy_stats.damage_blocked += damage - reducedDamage
         self.hp -= reducedDamage
         print(f'but {(damage - reducedDamage):.2f} damage is blocked!')
         print(f'Total damage taken: {reducedDamage:.2f}')

@@ -40,16 +40,21 @@ def PrintGui(plr, foe):
 
     if not (foe.hp <= 0 or plr.hp <= 0):
         input("Press enter to continue...")
-        os.system("cls")
+        os.system("cls" if os.name == "nt" else "clear")
 
 def PrintStats(round_stats):       
     chars = "Player", "Foe"
     print("------------------------")
     for i in range(2):
         print(f"{chars[i]} hits: {round_stats[i].hits}")
-        print(f"{chars[i]} damage taken: {round_stats[i].damage_taken:.2f}")
         print(f"{chars[i]} misses: {round_stats[i].misses}")
+        print(f"{chars[i]} critical_hits: {round_stats[i].critical_hits}")
+        print(f"{chars[i]} damage taken: {round_stats[i].damage_taken:.2f}")
+        print(f"{chars[i]} damage done: {round_stats[i].damage_done:.2f}")
+        print(f"{chars[i]} damage blocked: {round_stats[i].damage_blocked:.2f}")
         print("------------------------")
+    input("Press enter to continue...")
+    os.system("cls" if os.name == "nt" else "clear")
 
 #huvudloopen f;r spelet
 def MainLoop(Stats):
@@ -85,7 +90,7 @@ def MainLoop(Stats):
         PrintGui(plr, foe)
         
     winner = plr if foe.hp <= 0 else foe
-    print(f"{winner.name} wins the battle with {(winner.hp):.2f} remaining HP!\n")
+    print(f"👑 {winner.name} wins the battle with {(winner.hp):.2f} remaining HP! 👑\n")
     return plr_stats, foe_stats
     ###RETURN STATS###
 
@@ -108,7 +113,7 @@ while True:
                 print(f"- round {count}")
                 count+=1
             choice = ReadInt("Round number (or ^C to quit): ", 1, count-1)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             print(f"now showing stats for round {choice}: ")
             PrintStats(stats_storage[choice-1])
         except:
