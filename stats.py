@@ -12,7 +12,7 @@ class Stats:
 
     @hits.setter
     def hits(self, value):
-        self.__hits += value
+        self.__hits = value
 
     @property
     def misses(self):
@@ -20,7 +20,7 @@ class Stats:
 
     @misses.setter
     def misses(self, value):
-        self.__misses += value
+        self.__misses = value
 
     @property
     def damage_done(self):
@@ -28,7 +28,7 @@ class Stats:
 
     @damage_done.setter
     def damage_done(self, value):
-        self.__damage_done += value
+        self.__damage_done = value
 
     @property
     def damage_taken(self):
@@ -36,7 +36,7 @@ class Stats:
 
     @damage_taken.setter
     def damage_taken(self, value):
-        self.__damage_taken += value
+        self.__damage_taken = value
 
     @property
     def critical_hits(self):
@@ -44,7 +44,7 @@ class Stats:
 
     @critical_hits.setter
     def critical_hits(self, value):
-        self.__critical_hits += value
+        self.__critical_hits = value
     
 #output from mainloop = result
 #

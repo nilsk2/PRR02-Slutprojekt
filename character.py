@@ -29,8 +29,8 @@ class Character:
             return my_stats, enemy_stats
 
     def takeDamage(self, damage, enemy_stats):
-        enemy_stats.damage_taken += 1
         reducedDamage = max(0, damage * self.__defense)
+        enemy_stats.damage_taken += reducedDamage
         self.hp -= reducedDamage
         print(f'but {(damage - reducedDamage):.2f} damage is blocked!')
         print(f'Total damage taken: {reducedDamage:.2f}')

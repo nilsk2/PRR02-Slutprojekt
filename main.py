@@ -42,11 +42,14 @@ def PrintGui(plr, foe):
         input("Press enter to continue...")
         os.system("cls")
 
-def PrintStats(round_stats, characters):        
+def PrintStats(round_stats):       
+    chars = "Player", "Foe"
+    print("------------------------")
     for i in range(2):
-        print(f"{round_stats[i].hits}")
-        print(f"{round_stats[i].damage_taken}")
-        print(f"{round_stats[i].misses}")
+        print(f"{chars[i]} hits: {round_stats[i].hits}")
+        print(f"{chars[i]} damage taken: {round_stats[i].damage_taken:.2f}")
+        print(f"{chars[i]} misses: {round_stats[i].misses}")
+        print("------------------------")
 
 #huvudloopen f;r spelet
 def MainLoop(Stats):
@@ -104,7 +107,9 @@ while True:
             for round in stats_storage:
                 print(f"- round {count}")
                 count+=1
-            choice = ReadInt("Round number: ", 1, count-1)
+            choice = ReadInt("Round number (or ^C to quit): ", 1, count-1)
+            os.system("cls")
+            print(f"now showing stats for round {choice}: ")
             PrintStats(stats_storage[choice-1])
         except:
             print("no stats available, play a round first")
