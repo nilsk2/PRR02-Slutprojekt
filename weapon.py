@@ -1,38 +1,33 @@
 class Weapon: 
-    def __init__(self, baseDmg, difficulty, weaponType): 
-        self.__baseDmg = baseDmg
+    def __init__(self, base_dmg, difficulty, weapon_type): 
+        self.__base_dmg = base_dmg
         self.__difficulty = difficulty
-        self.__weaponType = weaponType
-    
+        self.__weapon_type = weapon_type
+        self.__custom = self.select_weapon(weapon_type)
+
     @property
-    def baseDmg(self):
-        return self.__baseDmg
+    def base_dmg(self):
+        return self.__base_dmg
         
     @property
     def difficulty(self):
         return self.__difficulty
     
     @property
-    def weaponType(self):
-        selectWeapon(self)
-        return self.__weaponType
+    def weapon_type(self):
+        self.select_weapon(self)
+        return self.__weapon_type
     
     @staticmethod
-    def selectWeapon(self):
-        if weaponType == 1:
-            return SwordAndShield(self, 1.5, 1)
-        else:
-            return Weapon()
-
-class SwordAndShield(Weapon):
-    def __init__(self, defenseMult, damageMult):
-        self.__defenseMult = defenseMult
-        self.__damageMult = damageMult
-        
-    @property
-    def defenseMult(self):
-        return self.__defenseMult
-    
-    @property
-    def damageMult(self):
-        return self.__damageMult
+    def select_weapon(weapon_type):
+        from swordandshield import SwordAndShield
+        from wizardstaff import WizardStaff
+        from longsword import Longsword
+        weapons = {
+            1: SwordAndShield,
+            2: WizardStaff,
+            3: Longsword
+        }
+        player_weapon = weapons.get(weapon_type)(1, 2)
+        print(player_weapon.defense_mult)
+        return player_weapon
