@@ -7,8 +7,8 @@ class Longsword(Weapon):
         
     @property
     def defense_mult(self):
-        return self.__defense_mult
+        return 1.0 
     
     @property
     def damage_mult(self):
-        return self.__damage_mult
+        return 1.0
