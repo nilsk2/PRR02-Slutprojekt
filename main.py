@@ -1,4 +1,5 @@
 from character import Character as char
+from statsstorage import StatsStorage as storage
 from stats import Stats
 import random as rand
 import os
@@ -96,14 +97,16 @@ def main_loop(stats):
 
 ##########
 
-stats_storage = []
+stats_storage = storage[Stats]()
+
 # menyn för spelet
 while True:
     result = ()
     choice = read_int("[1] Play the game [2] Show stats [3] Quit\n", 1, 3)
     if choice == 1:
         result = main_loop(Stats)
-        stats_storage.append(result)
+        storage.add_round(stats_storage, result)
+        stats_storage.print_stats(0)
     elif choice == 2:
         try:
             count = 1
