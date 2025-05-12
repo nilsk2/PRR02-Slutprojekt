@@ -44,20 +44,6 @@ def print_gui(player, foe):
         input("Press enter to continue...")
         os.system("cls" if os.name == "nt" else "clear")
 
-def print_stats(round_stats):
-    characters = "Player", "Foe"
-    print("------------------------")
-    for i in range(2):
-        print(f"{characters[i]} hits: {round_stats[i].hits}")
-        print(f"{characters[i]} misses: {round_stats[i].misses}")
-        print(f"{characters[i]} critical_hits: {round_stats[i].critical_hits}")
-        print(f"{characters[i]} damage_taken: {round_stats[i].damage_taken:.2f}")
-        print(f"{characters[i]} damage_done: {round_stats[i].damage_done:.2f}")
-        print(f"{characters[i]} damage_blocked: {round_stats[i].damage_blocked:.2f}")
-        print("------------------------")
-    input("Press enter to continue...")
-    os.system("cls" if os.name == "nt" else "clear")
-
 # huvudloopen för spelet
 def main_loop(stats):
     players_turn = False
@@ -73,10 +59,11 @@ def main_loop(stats):
     foe_name = f'{rand.choice(adjectives)} {rand.choice(races)}'
     foe = char(foe_name, 100, 0.7, rand.randint(10, 90), weapon_type)
 
+    # initialiserar stats för båda spelarna
     player_stats = stats()
     foe_stats = stats()
 
-    while True:
+    while True: # main loop för fightingsystemet
         if players_turn:
             print("It is now your turn: \n")
             player_stats, foe_stats = player.attack(foe, player_stats, foe_stats)
@@ -104,18 +91,19 @@ while True:
     result = ()
     choice = read_int("[1] Play the game [2] Show stats [3] Quit\n", 1, 3)
     if choice == 1:
-        result = main_loop(Stats)
-        storage.add_round(stats_storage, result)
-        stats_storage.print_stats(0)
+        result = main_loop(Stats) #starta spelet
+        storage.add_round(stats_storage, result) #lägger till en runda i stats storage
+        stats_storage.print_stats(0) #skriver ut statsen för rundan vid slutet av den
     elif choice == 2:
         try:
             count = 1
             print("choose to view the stats from one of the rounds below: ")
 
-            for round_number in range(stats_storage.get_rounds_amount()):
+            for round_number in range(stats_storage.get_rounds_amount()): #kollar antalet rundar och skriver ut de fint
                 print(f"* round {round_number+1}")
                 count += 1
 
+            # visar statsen för rundan som är vald
             choice = read_int("Round number (or ^C to quit): ", 1, count - 1)
             os.system("cls" if os.name == "nt" else "clear")
             print(f"now showing stats for round {choice}: ")
@@ -123,4 +111,4 @@ while True:
         except:
             print("no stats available, play a round first")
     else:
-        sys.exit(1)
+        sys.exit(1) #avslutar programmet

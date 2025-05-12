@@ -1,11 +1,11 @@
-from typing import List, TypeVar, Generic
+from typing import List, TypeVar, Generic # py libs för generiska saker
 import os
 
 T = TypeVar('T')
 
-class StatsStorage(Generic[T]):
+class StatsStorage(Generic[T]): # min egen generiska klass
     def __init__(self):
-        self.rounds: List[T] = []
+        self.rounds: List[T] = [] # generisk för alla rundor att sparas i
 
     def add_round(self, round_stats: T):
         self.rounds.append(round_stats)
@@ -13,7 +13,7 @@ class StatsStorage(Generic[T]):
     def get_round(self, index: int) -> T:
         return self.rounds[index]
 
-    def print_stats(self, index):
+    def print_stats(self, index): # skriver ut stats för runda som är vald av användaren
         round_stats = self.rounds[index]
         characters = "Player", "Foe"
         print("------------------------")
@@ -28,5 +28,5 @@ class StatsStorage(Generic[T]):
         input("Press enter to continue...")
         os.system("cls" if os.name == "nt" else "clear")
 
-    def get_rounds_amount(self):
+    def get_rounds_amount(self): # används i main för att skriva ut antalet rundor så spelaren kan välja en
         return(len(self.rounds))

@@ -3,7 +3,6 @@ class Weapon:
         self.__base_dmg = base_dmg
         self.__difficulty = difficulty
         self.__weapon_type = weapon_type
-        self.__custom = self.select_weapon(weapon_type)
 
     @property
     def base_dmg(self):
@@ -19,7 +18,7 @@ class Weapon:
         return self.__weapon_type
     
     @staticmethod
-    def select_weapon(weapon_type):
+    def select_weapon(weapon_type): # koden för att ge spelaren sitt vapen
         from swordandshield import SwordAndShield
         from wizardstaff import WizardStaff
         from longsword import Longsword
@@ -29,5 +28,4 @@ class Weapon:
             3: Longsword
         }
         player_weapon = weapons.get(weapon_type)(1, 2)
-        print(player_weapon.defense_mult)
-        return player_weapon
+        return player_weapon # returnerar vapen info till spelaren

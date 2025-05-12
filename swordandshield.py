@@ -1,6 +1,5 @@
 from weapon import Weapon
-import sys
-
+# filen för sword and shield vapnet, all info om vapnet sparas och tas härifrån
 class SwordAndShield(Weapon):
     def __init__(self, defense_mult, damage_mult):
         self.__defense_mult = defense_mult

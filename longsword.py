@@ -1,6 +1,6 @@
 from weapon import Weapon
 
-class Longsword(Weapon):
+class Longsword(Weapon): # klassen för longsword vapnet, håller all info om vapnet
     def __init__(self, defense_mult, damage_mult):
         self.__defense_mult = defense_mult
         self.__damage_mult = damage_mult
