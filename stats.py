@@ -1,3 +1,6 @@
+# denna klass håller stats för pågående rundor
+# rundorna sparas inte här, de sparas i statsstorage.py
+
 class Stats:
     def __init__(self):
         self.__hits = 0

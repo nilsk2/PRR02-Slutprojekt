@@ -11,6 +11,7 @@ class Character:
     def attack(self, target, my_stats, enemy_stats): # metoden för att attackera varandra
         damage = self.char_weapon.base_dmg
         random_value = rand.randrange(0, 100) # rng "tärningen"
+
         if random_value < 10: # om spelaren får en crit 
             my_stats.critical_hits += 1
             my_stats.hits += 1
@@ -19,12 +20,14 @@ class Character:
             target.take_damage(damage * 2, enemy_stats)
             my_stats.damage_done += damage * 2
             return my_stats, enemy_stats
+
         elif random_value < self.char_weapon.difficulty: # om spelaren får en vanlig träff
             my_stats.hits += 1
             print(f"{damage:.2f} damage is dealt by {self.name}")
             target.take_damage(damage, enemy_stats)
             my_stats.damage_done += damage
             return my_stats, enemy_stats      
+
         else: # om spelaren missar
             my_stats.misses += 1
             print(f"{self.name}'s attack misses")
