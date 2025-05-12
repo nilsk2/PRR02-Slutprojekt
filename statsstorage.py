@@ -12,7 +12,7 @@ class StatsStorage(Generic[T]):
 
     def get_round(self, index: int) -> T:
         return self.rounds[index]
-    
+
     def print_stats(self, index):
         round_stats = self.rounds[index]
         characters = "Player", "Foe"
@@ -27,3 +27,6 @@ class StatsStorage(Generic[T]):
             print("------------------------")
         input("Press enter to continue...")
         os.system("cls" if os.name == "nt" else "clear")
+
+    def get_rounds_amount(self):
+        return(len(self.rounds))

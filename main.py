@@ -62,7 +62,7 @@ def print_stats(round_stats):
 def main_loop(stats):
     players_turn = False
     skill_points = 125
-    
+
     # spelaren skapar sin gubbe
     print(f"skillpoints are used for deciding your hp, damage, and defense.\nyou have {skill_points} skill points left")
     player_weapon_damage = read_int("tune your char with 100 points, more damage = less accuracy: ", 0, 100)
@@ -85,11 +85,11 @@ def main_loop(stats):
             print("It is now the enemy's turn: \n")
             foe_stats, player_stats = foe.attack(player, foe_stats, player_stats)
             players_turn = True
-        
+
         if foe.hp <= 0 or player.hp <= 0:
             break
         print_gui(player, foe)
-        
+
     winner = player if foe.hp <= 0 else foe
     print(f"👑 {winner.name} wins the battle with {(winner.hp):.2f} remaining HP! 👑\n")
     return player_stats, foe_stats
@@ -111,13 +111,15 @@ while True:
         try:
             count = 1
             print("choose to view the stats from one of the rounds below: ")
-            for round in stats_storage:
-                print(f"- round {count}")
+
+            for round_number in range(stats_storage.get_rounds_amount()):
+                print(f"* round {round_number+1}")
                 count += 1
+
             choice = read_int("Round number (or ^C to quit): ", 1, count - 1)
             os.system("cls" if os.name == "nt" else "clear")
             print(f"now showing stats for round {choice}: ")
-            print_stats(stats_storage[choice - 1])
+            stats_storage.print_stats(choice - 1)
         except:
             print("no stats available, play a round first")
     else:
