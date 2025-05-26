@@ -53,7 +53,8 @@ def main_loop(stats):
     print(f"skillpoints are used for deciding your hp, damage, and defense.\nyou have {skill_points} skill points left")
     player_weapon_damage = read_int("tune your char with 100 points, more damage = less accuracy: ", 0, 100)
     weapon_type = read_int("choose weapon type: \n1. Sword and shield\n2. Wizard staff\n3. Longsword ", 1, 3)
-    player = char("nils", 100, 0.7, player_weapon_damage, weapon_type)
+    player_name = input("please enter your name: ")
+    player = char(player_name, 100, 0.7, player_weapon_damage, weapon_type)
 
     # skapar fienden med random namn och stats
     foe_name = f'{rand.choice(adjectives)} {rand.choice(races)}'
